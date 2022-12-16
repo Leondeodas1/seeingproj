@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/table.css')}}">
+    <title>{{current_user.first_name}}</title>
+</head>
+<body style="padding: 10px;">
+    <div>
+    <header style="display:flex; justify-content: space-between; padding: 10px;">
+        <h1>Sasquatch WebSighting</h1>
+        <h1 style="text-align: center ;">{{current_user.first_name}} {{current_user.last_name}}</h1>
+    </div>
+    <div style=" display: flex;justify-content: end;">
+        <div>
+        <form action="/report_a_sighting" method="get">
+            <button class="btn btn-warning">Report a sighting</button>
+        </form>
+            <form action="/logout" method="GET">
+                <button class="btn btn-primary">logout</button>
+            </form>
+        </div>
+    </div>
+
+        <div class="report">
+        <h3 style="margin: 10px;">Reported Sightings</h3>
+    </div>
+        <table class="table table-bordered table-striped" style="border-color: black; "  >
+            
+            <tbody>
+                    
+                        <div class ="container" style="overflow: scroll; height: 500px;">
+                            {%for z in all.his%}
+                            <div class="addline">
+                                <div class="fix2">
+                                    <p>{{z['location']}}</p> - <p>{{z['date_of_sighting'].strftime("%B %#d, %Y")}}</p>
+                                </div>
+                                <div class="fix">
+                                    <p>Reported by {{z.first_name}}</p>
+                                    <div><a href="/view_sightings/{{z.id}}">View</a> <a href="/edit/{{z.id}}">edit</a> <a href="/delete/{{z.id}}">delete</a></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                    </div>
+                
+
+            </tbody>
+</table>
+
+
+</body>
+</html>

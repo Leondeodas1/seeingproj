@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='login/all.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <header style="display:flex; justify-content: space-between; padding: 10px;">
+                <h1 style="text-align: center ;">Sasquatch WebSighting</h1>
+                <h1>{{current_user.first_name}} {{current_user.last_name}}</h1></header>
+        </div>
+        <div style=" display: flex;justify-content: end;">
+            <div>
+                <a href="/home" class="btn btn-warning">Dashboard</a>
+                <form action="/logout" method="GET">
+                    
+                    <button class="btn btn-primary">logout</button>
+                </form>
+                
+            </div>
+        </div>
+    
+        {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+                <p style="color: red;">{{message}}</p> 
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {%for z in one%}
+    <form action="/change_sighting/{{z['id']}}", method="post", style="display: flex; justify-content: space-evenly;">
+        <div style="padding: 20px;">
+
+            <h3>Edit this Sighting</h3>
+            <input type="hidden" name="users_id" value="{{z.id}}" >
+
+            <div class="mb-3 row">
+                <label for="location" class="col-form-label col-sm-2" >Location</label>
+                <div class="col-sm-10">
+                <input type="text" name="location" value="{{z.location}}" class="form-control" >
+                </div>
+            </div> 
+            <div class="mb-3 row">
+                <label for="what_happened" class="col-form-label col-sm-2">what_happened</label>
+                <div >
+                    <textarea name="what_happened" cols="30" rows="10" class="form-control" >{{z.what_happened}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="mb-3 row">
+                <label for="date_of_sighting" class="form-label">date of sighting</label>
+                <input type="date" name="date_of_sighting" value="{{z.date_of_sighting}}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="number_of_sasquatches"># of Sasquatches</label>
+                <input type="number" name="number_of_sasquatches" value="{{z.number_of_sasquatches}}">
+            </div>
+            <button>Submit</button>
+            {%endfor%}
+        </div>
+    </form>
+</body>
+</html>

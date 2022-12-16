@@ -1,0 +1,13 @@
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+form{
+    /* background-color: #34393E; */
+    color: black;
+    width: 350px;
+    height: 600px;
+    padding: 20px;
+}

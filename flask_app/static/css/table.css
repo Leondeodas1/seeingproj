@@ -1,0 +1,29 @@
+.container{
+    
+    border-style: solid;
+}
+.scroll{
+    overflow: scroll ;
+}
+
+.fix{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.fix2{
+    display: flex;
+    padding: 10px;
+
+}
+
+
+
+.report{
+
+    margin-left: 90px;
+}
+.addline{
+    border-bottom: 5px black;
+    border-top-style: solid;
+}
